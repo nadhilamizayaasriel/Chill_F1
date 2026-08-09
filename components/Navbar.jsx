@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css/navbar.css";
 import DropdownMenu from "./DropdownMenu";
 import ChillLogo from "./ChillLogo";
+import UserIcon from "../assets/account.png";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ function Navbar() {
       </div>
 
       <div className="user-badge" onClick={() => setIsOpen(!isOpen)}>
-        <img src="../assets/account.png" alt="User Icon" />
+        <img src={UserIcon} alt="User Icon" />
         <span className="material-symbols-outlined icon-dropdown">
           keyboard_arrow_down
         </span>
