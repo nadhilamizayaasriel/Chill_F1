@@ -1,0 +1,100 @@
+
+.category {
+  padding: clamp(1rem, 4vw, 5rem);
+  gap: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+
+/* WADAH BUTTON + CAROUSEL */
+.movie-list {
+  position: relative;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+
+/* BAGIAN YANG SCROLL */
+.carousel-wrap {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* BUTTON */
+.nav-btn {
+  position: absolute;
+
+  top: 50%;
+  /* Menggabungkan posisi tengah awal dan ukuran normal (scale 1) */
+  transform: translateY(-50%) scale(1);
+
+  z-index: 10;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 2px solid var(--warna-border);
+
+  background-color: #22282a;
+  color: var(--warna-text);
+
+  /* Efek transisi mulus untuk scale dan bayangan */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  
+  /* Memastikan zoom tetap di titik tengah tombol */
+  transform-origin: center; 
+  
+  /* Bayangan tipis saat tombol normal */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  background-color: var(--warna-border);
+  color: var(--warna-text);
+  
+  /* Tetap pertahankan translateY(-50%) lalu kalikan dengan scale zoom-nya (misal: 1.2) */
+  transform: translateY(-50%) scale(1.2);
+  
+  /* Bayangan menebal agar terlihat melayang ke depan */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); 
+}
+
+.left-btn {
+  left: -1.25rem;
+}
+
+.right-btn {
+  right: -1.25rem;
+}
+
+@media (max-width: 768px) {
+  .nav-btn {
+    display: none;
+  }
+}

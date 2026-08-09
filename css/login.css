@@ -1,0 +1,98 @@
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ),
+    url("../assets/masuk_background.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 2rem;
+}
+
+.login-card {
+  width: min(100%, 31rem);
+
+  padding: 2.5rem 2.2rem;
+
+  background: rgba(20, 22, 23, 0.88);
+
+  border-radius: 0.75rem;
+}
+
+.login-card h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  font-family: var(--font-body);
+}
+
+
+.login-card p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: white;
+  font-family: var(--font-body);
+}
+
+.group-text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-links{
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  margin-top: 0.75rem;
+  margin-bottom: 2rem;
+
+}
+.register-link{
+  color: rgb(151, 116, 116);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+.forgot-password-link{
+  color: rgb(151, 116, 116);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+.register-link:hover{
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+}
+
+.forgot-password-link:hover{
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+}
+
+p{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.1rem;
+  font-family: var(--font-body);
+}

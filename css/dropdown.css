@@ -1,0 +1,27 @@
+.user-badge {
+  position: relative; /* penting supaya dropdown nempel ke sini */
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;   /* muncul tepat di bawah user-badge */
+  right: 0;    /* pojok kanan */
+  background: #222;
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  background: #333;
+}
