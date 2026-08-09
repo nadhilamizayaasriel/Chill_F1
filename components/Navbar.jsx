@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/navbar.css";
 import DropdownMenu from "./DropdownMenu";
+import ChillLogo from "./ChillLogo";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,10 +9,7 @@ function Navbar() {
   return (
     <nav className="top-nav">
       <div className="wrapper-logo">
-        <div className="logo">
-          <img src="../assets/chill_logo.svg" alt="Logo" />
-          <span>Chill</span>
-        </div>
+        <ChillLogo />
         <ul className="nav-links">
           <li><a href="#">Series</a></li>
           <li><a href="#">Film</a></li>
