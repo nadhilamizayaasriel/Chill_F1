@@ -1,12 +1,23 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutUser } from "../utils/auth";
 import "../css/dropdown.css";
 
 function DropdownMenu() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logoutUser();
+    navigate("/login");
+  }
+
   return (
     <div className="dropdown-menu">
-      <a href="#">Profil Saya</a>
+      <Link to="/profile">Profil Saya</Link>
       <a href="#">Ubah Premium</a>
-      <a href="#">Keluar</a>
+      <Link to="/login" onClick={handleLogout}>
+        Keluar
+      </Link>
     </div>
   );
 }

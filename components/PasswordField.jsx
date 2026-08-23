@@ -1,18 +1,16 @@
 import { useState } from "react";
 import "../css/passwordfield.css";
 
-function PasswordField({label, placeholder}) {
+function PasswordField({ label, placeholder, name }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="password-field">
-
       <label>{label}</label>
 
       <div className="password-input-wrapper">
-
         <input
-          name="password"
+          name={name}
           type={showPassword ? "text" : "password"}
           placeholder={placeholder}
           required
@@ -26,9 +24,7 @@ function PasswordField({label, placeholder}) {
             {showPassword ? "visibility" : "visibility_off"}
           </span>
         </button>
-
       </div>
-
     </div>
   );
 }

@@ -1,15 +1,47 @@
 import React, { useState } from "react";
 import "../css/navbar.css";
 import ChillLogo from "./ChillLogo";
+import UserBadge from "./UserBadge";
 import { Link } from "react-router-dom";
+import { getCurrentUser } from "../utils/auth";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const currentUser = getCurrentUser();
 
   return (
     <nav className="top-nav">
       <div className={`wrapper ${isOpen ? "open" : ""}`}>
         <ChillLogo />
+
+        <ul>
+          <li>
+            <Link to="/">Series</Link>{" "}
+          </li>
+
+          <li>
+            <Link to="/">Film</Link>
+          </li>
+
+          <li>
+            <Link to="/profile#daftar-saya">Daftar Saya</Link>{" "}
+          </li>
+
+          {!currentUser && (
+            <>
+              <li>
+                <Link to="/login">Masuk</Link>
+              </li>
+
+              <li>
+                <Link to="/register">Daftar</Link>
+              </li>
+            </>
+          )}
+        </ul>
+
+        {currentUser && <UserBadge />}
 
         <button
           type="button"
@@ -22,14 +54,6 @@ function Navbar() {
             {isOpen ? "close" : "menu"}
           </span>
         </button>
-
-        <ul>
-          <li><a href="#">Series</a></li>
-          <li><a href="#">Film</a></li>
-          <li><a href="#">Daftar Saya</a></li>
-          <li><Link to="/login">Masuk</Link></li>
-          <li><Link to="/register">Daftar</Link></li>
-        </ul>
       </div>
     </nav>
   );

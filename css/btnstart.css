@@ -1,0 +1,20 @@
+.btn-start {
+  background-color: #0f1e93;
+  font-family: var(--font-body);
+  color: var(--warna-text);
+  border: none;
+  border-radius: 3rem;
+  padding: clamp(0.45rem, 1vw, 0.625rem) clamp(0.9rem, 2vw, 1.625rem);
+  font-size: clamp(0.85rem, 1.6vw, 1.125rem);
+  cursor: pointer;
+
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.btn-start:hover{
+  background-color: #0d1a7a;
+  transform: scale(1.06);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+}

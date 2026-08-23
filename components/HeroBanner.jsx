@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import openingImage from "../assets/opening-image.png";
 import "../css/hero.css";
+import ButtonStart from "./ButtonStart";
 
 function HeroBanner() {
   const [isMuted, setIsMuted] = useState(false); // tambahkan state
@@ -20,7 +21,7 @@ function HeroBanner() {
         </div>
         <div className="hero-btn-wrapper">
           <div className="btn-wrapper">
-            <button className="btn-start">Mulai</button>
+            <ButtonStart />
             <button className="btn-info">
               <span className="material-symbols-outlined">info</span>
               Selengkapnya

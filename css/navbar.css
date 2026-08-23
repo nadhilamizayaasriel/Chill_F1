@@ -2,7 +2,7 @@
   width: 100%;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1111;
 
   display: flex;
   align-items: center;
@@ -12,6 +12,7 @@
   padding: 1rem clamp(1rem, 4vw, 5rem);
 
   box-sizing: border-box;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* =========================
@@ -20,7 +21,7 @@
 
 .wrapper {
   width: 100%;
-  position: relative;
+  /* position: relative; */
 
   display: flex;
   align-items: center;
@@ -34,6 +35,9 @@
    MENU BUTTON
 ========================= */
 
+.user-badge{
+  margin-left: 2rem
+}
 .icon-menu {
   display: none;
 
@@ -142,37 +146,40 @@
 
 @media (max-width: 768px) {
   .top-nav {
-    position: relative;
-
+    position: sticky;
     padding: 0.75rem 1rem;
   }
 
-  /* Hamburger */
-  .icon-menu {
-    display: block;
-  }
-
-  /* Sembunyikan menu */
   .wrapper > ul {
     display: none;
   }
 
-  .wrapper.open > ul  {
+  .user-badge {
+    margin-left: auto;
+    margin-right: 0.75rem;
+  }
+
+  .icon-menu {
+    display: block;
+    margin-left: 0;
+  }
+
+  .wrapper.open > ul {
     position: absolute;
-    top: calc(100% + 0.75rem);
+    top: 100%;
     right: 0;
     left: 0;
 
     display: flex;
     flex-direction: column;
+    align-items: stretch;
 
     gap: 1rem;
 
     margin: 0;
-    padding: 0.75rem 0;
+    padding: 1.25rem 1.5rem;
 
     background-color: var(--warna-main);
-
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
 
@@ -180,5 +187,10 @@
     width: 100%;
   }
 
-  
+  .wrapper.open > ul > li > a {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+  }
 }

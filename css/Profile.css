@@ -1,0 +1,52 @@
+/* =========================
+   PROFILE
+========================= */
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem clamp(1rem, 4vw, 5rem);
+  gap: 2rem;
+}
+
+.profile-title {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 700;
+
+  color: var(--warna-text);
+}
+
+.user-icon {
+  width: 8rem;
+  height: auto;
+
+  border-radius: 50%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+/* =========================
+   DAFTAR SAYA
+========================= */
+
+.daftar-movie-container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+}
+
+.daftar-movie-container h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+
+  color: var(--warna-text);
+  font-family: var(--font-body);
+}

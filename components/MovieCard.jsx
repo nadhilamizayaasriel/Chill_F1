@@ -6,17 +6,20 @@ function MovieCard({
   image,
   rating,
   progress,
+  onClick,
 }) {
   return (
-    <div className="card-movie">
-
+    <div
+      className="card-movie"
+      onClick={onClick}
+      style={{ cursor: "pointer" }}
+    >
       <img
         src={image}
         alt={title}
       />
 
       <div className="title-wrapper">
-
         <p className="title-movie">
           <b>{title}</b>
         </p>
@@ -26,9 +29,8 @@ function MovieCard({
             star
           </span>
 
-          {rating}/5
+          {rating ? `${rating}/5` : "-"}
         </p>
-
       </div>
 
       {progress !== undefined && (
@@ -38,10 +40,9 @@ function MovieCard({
             style={{
               width: `${progress}%`,
             }}
-          ></div>
+          />
         </div>
       )}
-
     </div>
   );
 }
