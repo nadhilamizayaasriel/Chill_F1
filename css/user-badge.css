@@ -1,0 +1,28 @@
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.user-badge img {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+}
+
+.user-badge:hover img,
+.user-badge:hover > span {
+  transform: scale(1.06);
+}
+
+@media(max-width: 768px) {
+  .user-badge {
+    gap: 0.25rem;
+    margin-left: auto;
+  }
+  .user-badge img {
+    width: 2rem;
+    height: 2rem;
+  }
+}

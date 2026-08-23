@@ -51,19 +51,19 @@ function Homepage() {
           ? upcomingRes.results
           : [];
 
-        // continueMovies
-        setContinueMovies(
-          popular
-            .filter((m) => m.backdrop_path)
-            .slice(0, 10)
-            .map((m, i) => ({
-              id: m.id,
-              title: m.title,
-              image: `https://image.tmdb.org/t/p/w1280${m.backdrop_path}`,
-              vote_average: m.vote_average,
-              progress: [65, 40, 78, 25, 90, 35, 55, 70, 45, 82][i],
-            })),
-        );
+        // // continueMovies
+        // setContinueMovies(
+        //   popular
+        //     .filter((m) => m.backdrop_path)
+        //     .slice(0, 10)
+        //     .map((m, i) => ({
+        //       id: m.id,
+        //       title: m.title,
+        //       image: `https://image.tmdb.org/t/p/w1280${m.backdrop_path}`,
+        //       vote_average: m.vote_average,
+        //       progress: [65, 40, 78, 25, 90, 35, 55, 70, 45, 82][i],
+        //     })),
+        // );
 
         // topMovies
         const topSlice = top
@@ -135,12 +135,12 @@ function Homepage() {
 
       <HeroBanner />
 
-      {/* MELANJUTKAN MENONTON */}
+      {/* MELANJUTKAN MENONTON
       <CategorySection
         title="Melanjutkan Menonton"
         movies={continueMovies}
         CardComponent={MovieCard}
-      />
+      /> */}
 
       {/* TOP RATING */}
       <CategorySection

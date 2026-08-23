@@ -4,6 +4,7 @@
 /* icon */
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
+
 * {
   margin: 0;
   padding: 0;
@@ -29,10 +30,10 @@ body,
 }
 
 body {
-  margin: 0;
   font-family: var(--font-body);
   background-color: var(--warna-main);
   color: var(--warna-text);
+  min-height: 100vh;
 }
 
 .material-symbols-outlined {
@@ -95,6 +96,7 @@ h3{
   color: var(--warna-text);
   cursor: pointer; /* Mengubah kursor saat hover */
 }
+
 a {
   text-decoration: none; /* Menghapus garis bawah pada link */
   color: var(--warna-text); /* Warna link */

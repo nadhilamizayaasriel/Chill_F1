@@ -1,30 +1,35 @@
 import React, { useState } from "react";
 import "../css/navbar.css";
-import DropdownMenu from "./DropdownMenu";
 import ChillLogo from "./ChillLogo";
-import UserIcon from "../assets/account.png";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="top-nav">
-      <div className="wrapper-logo">
+      <div className={`wrapper ${isOpen ? "open" : ""}`}>
         <ChillLogo />
-        <ul className="nav-links">
+
+        <button
+          type="button"
+          className="icon-menu"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+          aria-expanded={isOpen}
+        >
+          <span className="material-symbols-outlined">
+            {isOpen ? "close" : "menu"}
+          </span>
+        </button>
+
+        <ul>
           <li><a href="#">Series</a></li>
           <li><a href="#">Film</a></li>
           <li><a href="#">Daftar Saya</a></li>
+          <li><Link to="/login">Masuk</Link></li>
+          <li><Link to="/register">Daftar</Link></li>
         </ul>
-      </div>
-
-      <div className="user-badge" onClick={() => setIsOpen(!isOpen)}>
-        <img src={UserIcon} alt="User Icon" />
-        <span className="material-symbols-outlined icon-dropdown">
-          keyboard_arrow_down
-        </span>
-
-        {isOpen && <DropdownMenu />}
       </div>
     </nav>
   );
