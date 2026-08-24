@@ -19,11 +19,6 @@ function CategorySection({
   const [canScrollRight, setCanScrollRight] =
     useState(false);
 
-
-  // =========================
-  // CEK APAKAH PERLU SCROLL
-  // =========================
-
   const checkScroll = () => {
     const element = carouselRef.current;
 
@@ -43,11 +38,6 @@ function CategorySection({
         element.scrollWidth - 1
     );
   };
-
-
-  // =========================
-  // CEK SAAT MOVIE BERUBAH
-  // =========================
 
   useEffect(() => {
     checkScroll();
@@ -79,11 +69,6 @@ function CategorySection({
     };
   }, [movies]);
 
-
-  // =========================
-  // SCROLL KIRI
-  // =========================
-
   const scrollLeft = () => {
     carouselRef.current?.scrollBy({
       left: -500,
@@ -91,22 +76,12 @@ function CategorySection({
     });
   };
 
-
-  // =========================
-  // SCROLL KANAN
-  // =========================
-
   const scrollRight = () => {
     carouselRef.current?.scrollBy({
       left: 500,
       behavior: "smooth",
     });
   };
-
-
-  // =========================
-  // MOVIE KOSONG
-  // =========================
 
   if (!movies || movies.length === 0) {
     return (
@@ -125,10 +100,6 @@ function CategorySection({
 
       <div className="movie-list">
 
-        {/* =========================
-            ARROW KIRI
-        ========================= */}
-
         {canScroll && canScrollLeft && (
           <button
             className="nav-btn left-btn"
@@ -140,11 +111,6 @@ function CategorySection({
             </span>
           </button>
         )}
-
-
-        {/* =========================
-            MOVIE
-        ========================= */}
 
         <div
           className="carousel-wrap"
@@ -170,12 +136,7 @@ function CategorySection({
           ))}
 
         </div>
-
-
-        {/* =========================
-            ARROW KANAN
-        ========================= */}
-
+        
         {canScroll && canScrollRight && (
           <button
             className="nav-btn right-btn"
