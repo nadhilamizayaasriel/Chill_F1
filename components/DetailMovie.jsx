@@ -69,11 +69,6 @@ function DetailMovie({ movie, onClose }) {
     return null;
   }
 
-
-  // =========================
-  // TOGGLE DAFTAR SAYA
-  // =========================
-
   function handleToggleMyList() {
     const currentUser = getCurrentUser();
 

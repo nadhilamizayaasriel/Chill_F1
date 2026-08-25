@@ -63,10 +63,6 @@ function Profile() {
     <>
       <Navbar />
 
-      {/* =========================
-          PROFILE
-      ========================= */}
-
       <div className="profile-container">
 
         <h1 className="profile-title">
