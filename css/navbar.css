@@ -1,19 +1,22 @@
+/* =========================
+   NAVBAR
+========================= */
+
 .top-nav {
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 1111;
 
-  display: flex;
-  align-items: center;
-
   background-color: var(--warna-main);
 
   padding: 1rem clamp(1rem, 4vw, 5rem);
 
   box-sizing: border-box;
+
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
+
 
 /* =========================
    WRAPPER
@@ -21,42 +24,29 @@
 
 .wrapper {
   width: 100%;
-  /* position: relative; */
+
+  position: relative;
 
   display: flex;
   align-items: center;
 }
 
-.wrapper .chill-logo {
-  margin: 0;
-}
 
 /* =========================
-   MENU BUTTON
+   LOGO
 ========================= */
 
-.user-badge{
-  margin-left: 2rem
+.wrapper .chill-logo {
+  display: block;
+
+  margin: 0;
+
+  flex-shrink: 0;
 }
-.icon-menu {
-  display: none;
 
-  cursor: pointer;
-
-  font-size: 2rem;
-
-  background: transparent;
-  border: none;
-
-  color: var(--warna-text);
-
-  padding: 0;
-
-  margin-left: auto;
-}
 
 /* =========================
-   UL
+   DESKTOP MENU
 ========================= */
 
 .wrapper > ul {
@@ -65,8 +55,6 @@
 
   gap: 2rem;
 
-  font-size: 1.3rem;
-
   list-style: none;
 
   padding: 0;
@@ -74,7 +62,10 @@
   margin: 0 0 0 auto;
 
   white-space: nowrap;
+
+  font-size: 1.3rem;
 }
+
 
 /* =========================
    LI
@@ -82,9 +73,9 @@
 
 .wrapper > ul > li {
   position: relative;
-
   cursor: pointer;
 }
+
 
 /* =========================
    LINK
@@ -95,22 +86,24 @@
 
   display: block;
 
+  padding: 5px;
+
   color: var(--warna-text);
 
   text-decoration: none;
-
-  padding: 5px;
 }
+
 
 /* =========================
    HOVER
 ========================= */
 
 .wrapper > ul > li:hover > a {
-  zoom: 1.02;
+  transform: scale(1.02);
 
-  transition: zoom 200ms ease;
+  transition: transform 200ms ease;
 }
+
 
 /* =========================
    UNDERLINE
@@ -135,62 +128,143 @@
   transition: transform 200ms ease;
 }
 
-/* Cursor diarahkan ke LI */
 .wrapper > ul > li:hover::after {
   transform: scaleX(1);
 }
+
+
+/* =========================
+   USER BADGE
+========================= */
+
+.user-badge {
+  margin-left: 2rem;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.icon-menu {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  color: var(--warna-text);
+
+  cursor: pointer;
+
+  padding: 0;
+
+  font-size: 2rem;
+}
+
 
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 768px) {
+
   .top-nav {
-    position: sticky;
     padding: 0.75rem 1rem;
   }
+
+
+  /* Sembunyikan menu desktop */
 
   .wrapper > ul {
     display: none;
   }
 
+
+  /* =========================
+     USER BADGE
+  ========================= */
+
   .user-badge {
-    margin-left: auto;
-    margin-right: 0.75rem;
+    position: absolute;
+
+    right: 3rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    margin: 0;
   }
 
+
+  /* =========================
+     HAMBURGER
+  ========================= */
+
   .icon-menu {
-    display: block;
-    margin-left: auto;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+
+    right: 0;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    margin: 0;
   }
+
+
+  /* =========================
+     DROPDOWN
+  ========================= */
 
   .wrapper.open > ul {
     position: absolute;
-    top: 100%;
-    right: 0;
+
+    top: calc(100% + 0.75rem);
+
     left: 0;
+    right: 0;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: stretch;
 
     gap: 1rem;
 
     margin: 0;
+
     padding: 1.25rem 1.5rem;
 
+    box-sizing: border-box;
+
     background-color: var(--warna-main);
+
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
+
 
   .wrapper.open > ul > li {
     width: 100%;
   }
 
+
   .wrapper.open > ul > li > a {
     width: 100%;
+
     padding: 0.6rem 0.75rem;
+
     box-sizing: border-box;
+
     font-size: 1.1rem;
   }
 }
