@@ -161,7 +161,7 @@
 
   .icon-menu {
     display: block;
-    margin-left: 0;
+    margin-left: auto;
   }
 
   .wrapper.open > ul {
