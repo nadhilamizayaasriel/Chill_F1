@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
@@ -19,10 +19,10 @@ function Login() {
     const username = formData.get("username");
     const password = formData.get("password");
 
-    console.log("username:", username);
-    console.log("password:", password);
-
-    const result = loginUser(username, password);
+    const result = await loginUser(
+      username,
+      password,
+    );
 
     if (!result.success) {
       alert(result.message);
@@ -31,9 +31,9 @@ function Login() {
 
     alert("Login berhasil!");
 
-    navigate("/");
-
     console.log("User yang login:", result.user);
+
+    navigate("/");
   }
 
   return (
@@ -62,7 +62,10 @@ function Login() {
           <div className="auth-links">
             <span>
               Belum punya akun?{" "}
-              <a className="register-link" href="/register">
+              <a
+                className="register-link"
+                href="/register"
+              >
                 Daftar
               </a>
             </span>

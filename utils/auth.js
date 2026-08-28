@@ -1,87 +1,132 @@
-const USERS_KEY = "chill_users";
 const CURRENT_USER_KEY = "chill_current_user";
 
-export function getUsers() {
-  const users = localStorage.getItem(USERS_KEY);
+const API_URL =
+  "https://6a8e839ba12b7de8cc0ea7c9.mockapi.io/api/chill1/users";
 
-  if (!users) {
-    return [];
+// =========================
+// READ USERS
+// =========================
+
+export async function getUsers() {
+  const response = await fetch(API_URL);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data user.");
   }
 
-  return JSON.parse(users);
+  return await response.json();
 }
 
-export function registerUser(userData) {
-  const users = getUsers();
+// =========================
+// CREATE USER
+// =========================
 
-  const existingUser = users.find(
-    (user) => user.username === userData.username
-  );
+export async function registerUser(userData) {
+  try {
+    const users = await getUsers();
 
-  if (existingUser) {
+    // Cek username
+    const existingUser = users.find(
+      (user) => user.username === userData.username,
+    );
+
+    if (existingUser) {
+      return {
+        success: false,
+        message: "Username sudah terdaftar.",
+      };
+    }
+
+    // Buat user baru
+    const newUser = {
+      username: userData.username,
+      email: userData.email,
+      password: userData.password,
+      myList: [],
+    };
+
+    const response = await fetch(API_URL, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(newUser),
+    });
+
+    if (!response.ok) {
+      return {
+        success: false,
+        message: "Gagal membuat akun.",
+      };
+    }
+
+    const user = await response.json();
+
+    return {
+      success: true,
+      user,
+    };
+  } catch (error) {
+    console.error("Register error:", error);
+
     return {
       success: false,
-      message: "Username sudah terdaftar.",
+      message: "Terjadi kesalahan saat membuat akun.",
     };
   }
-
-  const newUser = {
-    id: Date.now(),
-    username: userData.username,
-    email: userData.email,
-    password: userData.password,
-    myList: [],
-  };
-
-  const updatedUsers = [...users, newUser];
-
-  localStorage.setItem(
-    USERS_KEY,
-    JSON.stringify(updatedUsers)
-  );
-
-  return {
-    success: true,
-    user: newUser,
-  };
 }
 
-export function loginUser(username, password) {
-  const users = getUsers();
+// =========================
+// LOGIN
+// =========================
 
-  const user = users.find(
-    (user) =>
-      user.username === username &&
-      user.password === password
-  );
+export async function loginUser(username, password) {
+  try {
+    const users = await getUsers();
 
-  if (!user) {
+    const user = users.find(
+      (user) =>
+        user.username === username &&
+        user.password === password,
+    );
+
+    if (!user) {
+      return {
+        success: false,
+        message: "Username atau password salah.",
+      };
+    }
+
+    // Simpan user yang sedang login
+    localStorage.setItem(
+      CURRENT_USER_KEY,
+      JSON.stringify(user),
+    );
+
+    return {
+      success: true,
+      user,
+    };
+  } catch (error) {
+    console.error("Login error:", error);
+
     return {
       success: false,
-      message: "Username atau password salah.",
+      message: "Gagal menghubungkan ke server.",
     };
   }
-
-  const currentUser = {
-    id: user.id,
-    username: user.username,
-    email: user.email,
-    password: user.password,
-  };
-
-  localStorage.setItem(
-    CURRENT_USER_KEY,
-    JSON.stringify(currentUser)
-  );
-
-  return {
-    success: true,
-    user: currentUser,
-  };
 }
+
+// =========================
+// CURRENT USER
+// =========================
 
 export function getCurrentUser() {
-  const user = localStorage.getItem(CURRENT_USER_KEY);
+  const user = localStorage.getItem(
+    CURRENT_USER_KEY,
+  );
 
   if (!user) {
     return null;
@@ -90,7 +135,11 @@ export function getCurrentUser() {
   return JSON.parse(user);
 }
 
-export function updateCurrentUser(updatedData) {
+// =========================
+// UPDATE USER
+// =========================
+
+export async function updateCurrentUser(updatedData) {
   const currentUser = getCurrentUser();
 
   if (!currentUser) {
@@ -100,39 +149,55 @@ export function updateCurrentUser(updatedData) {
     };
   }
 
-  const users = getUsers();
+  try {
+    const response = await fetch(
+      `${API_URL}/${currentUser.id}`,
+      {
+        method: "PUT",
 
-  const updatedUsers = users.map((user) => {
-    if (user.id !== currentUser.id) {
-      return user;
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          ...currentUser,
+          ...updatedData,
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      return {
+        success: false,
+        message: "Gagal memperbarui profil.",
+      };
     }
 
+    const updatedUser = await response.json();
+
+    // Update user yang sedang login
+    localStorage.setItem(
+      CURRENT_USER_KEY,
+      JSON.stringify(updatedUser),
+    );
+
     return {
-      ...user,
-      ...updatedData,
+      success: true,
+      user: updatedUser,
     };
-  });
+  } catch (error) {
+    console.error("Update error:", error);
 
-  const updatedCurrentUser = {
-    ...currentUser,
-    ...updatedData,
-  };
-
-  localStorage.setItem(
-    USERS_KEY,
-    JSON.stringify(updatedUsers),
-  );
-
-  localStorage.setItem(
-    CURRENT_USER_KEY,
-    JSON.stringify(updatedCurrentUser),
-  );
-
-  return {
-    success: true,
-    user: updatedCurrentUser,
-  };
+    return {
+      success: false,
+      message: "Terjadi kesalahan saat update profil.",
+    };
+  }
 }
+
+// =========================
+// LOGOUT
+// =========================
 
 export function logoutUser() {
   localStorage.removeItem(CURRENT_USER_KEY);

@@ -36,14 +36,14 @@ function Profile() {
   const [selectedMovie, setSelectedMovie] =
     useState(null);
 
-  function handleSave() {
+  async function handleSave() {
     console.log("DATA SEBELUM SAVE:", {
       username,
       email,
       password,
     });
 
-    const result = updateCurrentUser({
+    const result = await updateCurrentUser({
       username,
       email,
       password,

@@ -69,7 +69,7 @@ function DetailMovie({ movie, onClose }) {
     return null;
   }
 
-  function handleToggleMyList() {
+  async function handleToggleMyList() {
     const currentUser = getCurrentUser();
 
     // Belum login
@@ -123,7 +123,7 @@ function DetailMovie({ movie, onClose }) {
     // UPDATE LOCAL STORAGE
     // =========================
 
-    const result = updateCurrentUser({
+    const result = await updateCurrentUser({
       myList: updatedList,
     });
 

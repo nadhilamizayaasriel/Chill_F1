@@ -7,9 +7,8 @@ import GoogleBtn from "../components/GoogleBtn";
 import "../css/register.css";
 import { registerUser } from "../utils/auth";
 
-
 function Register() {
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
@@ -18,16 +17,16 @@ function Register() {
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
 
-    // Cek password dan konfirmasi password
+    // Cek password
     if (password !== confirmPassword) {
       alert("Kata sandi tidak sama.");
       return;
     }
 
-    // Simpan user
-    const result = registerUser({
-      name: username,
+    // Simpan user ke MockAPI
+    const result = await registerUser({
       username: username,
+      email: "",
       password: password,
     });
 
@@ -40,7 +39,7 @@ function Register() {
     // Kalau berhasil
     alert("Akun berhasil dibuat! Silakan Login.");
 
-    console.log("User berhasil dibuat:", result.user, );
+    console.log("User berhasil dibuat:", result.user);
   }
 
   return (
