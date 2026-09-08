@@ -1,4 +1,4 @@
-.logout-button {
+.delete-button {
   width: clamp(7rem, 20vw, 10rem);
   padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 3vw, 2rem);
   background-color: red;
@@ -11,9 +11,9 @@
   font-family: var(--font-body);
 }
 
-.logout-button:hover {
+.delete-button:hover {
   background-color: darkred;
 }
-.logout-button:active {
+.delete-button:active {
   background-color: #8b0000;
 }

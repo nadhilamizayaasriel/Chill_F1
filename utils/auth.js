@@ -1,21 +1,11 @@
+import {
+  getUsers,
+  addUser,
+  deleteUser,
+  updateUser,
+} from "../services/api/userApi";
+
 const CURRENT_USER_KEY = "chill_current_user";
-
-const API_URL =
-  "https://6a8e839ba12b7de8cc0ea7c9.mockapi.io/api/chill1/users";
-
-// =========================
-// READ USERS
-// =========================
-
-export async function getUsers() {
-  const response = await fetch(API_URL);
-
-  if (!response.ok) {
-    throw new Error("Gagal mengambil data user.");
-  }
-
-  return await response.json();
-}
 
 // =========================
 // CREATE USER
@@ -45,24 +35,7 @@ export async function registerUser(userData) {
       myList: [],
     };
 
-    const response = await fetch(API_URL, {
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(newUser),
-    });
-
-    if (!response.ok) {
-      return {
-        success: false,
-        message: "Gagal membuat akun.",
-      };
-    }
-
-    const user = await response.json();
+    const user = await addUser(newUser);
 
     return {
       success: true,
@@ -99,7 +72,6 @@ export async function loginUser(username, password) {
       };
     }
 
-    // Simpan user yang sedang login
     localStorage.setItem(
       CURRENT_USER_KEY,
       JSON.stringify(user),
@@ -124,15 +96,45 @@ export async function loginUser(username, password) {
 // =========================
 
 export function getCurrentUser() {
-  const user = localStorage.getItem(
-    CURRENT_USER_KEY,
-  );
+  const user = localStorage.getItem(CURRENT_USER_KEY);
 
   if (!user) {
     return null;
   }
 
   return JSON.parse(user);
+}
+
+// =========================
+// DELETE USER
+// =========================
+
+export async function deleteCurrentUser() {
+  const currentUser = getCurrentUser();
+
+  if (!currentUser) {
+    return {
+      success: false,
+      message: "User belum login.",
+    };
+  }
+
+  try {
+    await deleteUser(currentUser.id);
+
+    localStorage.removeItem(CURRENT_USER_KEY);
+
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error("Delete account error:", error);
+
+    return {
+      success: false,
+      message: "Gagal menghapus akun.",
+    };
+  }
 }
 
 // =========================
@@ -150,32 +152,14 @@ export async function updateCurrentUser(updatedData) {
   }
 
   try {
-    const response = await fetch(
-      `${API_URL}/${currentUser.id}`,
+    const updatedUser = await updateUser(
+      currentUser.id,
       {
-        method: "PUT",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          ...currentUser,
-          ...updatedData,
-        }),
+        ...currentUser,
+        ...updatedData,
       },
     );
 
-    if (!response.ok) {
-      return {
-        success: false,
-        message: "Gagal memperbarui profil.",
-      };
-    }
-
-    const updatedUser = await response.json();
-
-    // Update user yang sedang login
     localStorage.setItem(
       CURRENT_USER_KEY,
       JSON.stringify(updatedUser),

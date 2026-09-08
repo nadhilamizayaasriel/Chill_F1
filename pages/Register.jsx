@@ -5,9 +5,15 @@ import AuthButton from "../components/AuthButton";
 import GoogleBtn from "../components/GoogleBtn";
 
 import "../css/register.css";
+
 import { registerUser } from "../utils/auth";
 
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/redux/reducer";
+
 function Register() {
+  const dispatch = useDispatch();
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -15,31 +21,36 @@ function Register() {
 
     const username = formData.get("username");
     const password = formData.get("password");
-    const confirmPassword = formData.get("confirmPassword");
+    const confirmPassword =
+      formData.get("confirmPassword");
 
-    // Cek password
     if (password !== confirmPassword) {
       alert("Kata sandi tidak sama.");
       return;
     }
 
-    // Simpan user ke MockAPI
     const result = await registerUser({
-      username: username,
+      username,
       email: "",
-      password: password,
+      password,
     });
 
-    // Kalau gagal
     if (!result.success) {
       alert(result.message);
       return;
     }
 
-    // Kalau berhasil
-    alert("Akun berhasil dibuat! Silakan Login.");
+    // Tambahkan user ke Redux
+    dispatch(addUser(result.user));
 
-    console.log("User berhasil dibuat:", result.user);
+    alert(
+      "Akun berhasil dibuat! Silakan Login.",
+    );
+
+    console.log(
+      "User berhasil dibuat:",
+      result.user,
+    );
   }
 
   return (
@@ -74,7 +85,10 @@ function Register() {
           <div className="auth-links">
             <span>
               Sudah punya akun?{" "}
-              <a className="register-link" href="/login">
+              <a
+                className="register-link"
+                href="/login"
+              >
                 Masuk
               </a>
             </span>

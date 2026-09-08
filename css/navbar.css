@@ -17,7 +17,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-
 /* =========================
    WRAPPER
 ========================= */
@@ -26,30 +25,29 @@
   width: 100%;
 
   position: relative;
-
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
+/* =========================y
 
-/* =========================
    LOGO
 ========================= */
 
 .wrapper .chill-logo {
-  display: block;
+  /* display: block; */
 
   margin: 0;
 
   flex-shrink: 0;
 }
 
-
 /* =========================
    DESKTOP MENU
 ========================= */
 
-.wrapper > ul {
+.wrapper>ul {
   display: flex;
   align-items: center;
 
@@ -66,22 +64,20 @@
   font-size: 1.3rem;
 }
 
-
 /* =========================
    LI
 ========================= */
 
-.wrapper > ul > li {
+.wrapper>ul>li {
   position: relative;
   cursor: pointer;
 }
-
 
 /* =========================
    LINK
 ========================= */
 
-.wrapper > ul > li > a {
+.wrapper>ul>li>a {
   position: relative;
 
   display: block;
@@ -93,23 +89,21 @@
   text-decoration: none;
 }
 
-
 /* =========================
    HOVER
 ========================= */
 
-.wrapper > ul > li:hover > a {
+.wrapper>ul>li:hover>a {
   transform: scale(1.02);
 
   transition: transform 200ms ease;
 }
 
-
 /* =========================
    UNDERLINE
 ========================= */
 
-.wrapper > ul > li::after {
+.wrapper>ul>li::after {
   content: "";
 
   position: absolute;
@@ -128,21 +122,9 @@
   transition: transform 200ms ease;
 }
 
-.wrapper > ul > li:hover::after {
+.wrapper>ul>li:hover::after {
   transform: scaleX(1);
 }
-
-
-/* =========================
-   USER BADGE
-========================= */
-
-.user-badge {
-  margin-left: 2rem;
-
-  flex-shrink: 0;
-}
-
 
 /* =========================
    MENU BUTTON
@@ -163,69 +145,61 @@
   font-size: 2rem;
 }
 
-
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 768px) {
-
   .top-nav {
     padding: 0.75rem 1rem;
   }
 
-
   /* Sembunyikan menu desktop */
 
-  .wrapper > ul {
+  .wrapper>ul {
     display: none;
   }
-
 
   /* =========================
      USER BADGE
   ========================= */
-
   .user-badge {
-    position: absolute;
-
-    right: 3rem;
+    /* right: 3rem;
 
     top: 50%;
 
-    transform: translateY(-50%);
+    transform: translateY(-50%); */
 
-    margin: 0;
+    margin-left: auto;
+    flex-shrink: 0;
   }
-
 
   /* =========================
      HAMBURGER
   ========================= */
-
   .icon-menu {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    position: absolute;
+    margin-left: 1rem;
 
-    right: 0;
+    border: none;
+    background: transparent;
 
-    top: 50%;
+    color: var(--warna-text);
 
-    transform: translateY(-50%);
+    cursor: pointer;
 
-    margin: 0;
+    padding: 0;
+    font-size: 2rem;
   }
-
 
   /* =========================
      DROPDOWN
   ========================= */
 
-  .wrapper.open > ul {
+  .wrapper.open>ul {
     position: absolute;
 
     top: calc(100% + 0.75rem);
@@ -252,13 +226,11 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
 
-
-  .wrapper.open > ul > li {
+  .wrapper.open>ul>li {
     width: 100%;
   }
 
-
-  .wrapper.open > ul > li > a {
+  .wrapper.open>ul>li>a {
     width: 100%;
 
     padding: 0.6rem 0.75rem;

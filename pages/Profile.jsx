@@ -4,11 +4,16 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FieldProfile from "../components/FieldProfile";
 import UserIcon from "../assets/userbadge_new.png";
-import LogoutButton from "../components/LogoutBtn";
+import DeleteAccountBtn from "../components/DeleteAccountBtn";
 import SaveButton from "../components/Savebtn";
 import CategorySection from "../components/CategorySection";
 import MovieCard from "../components/MovieCard";
 import DetailMovie from "../components/DetailMovie";
+
+import { useDispatch, useSelector } from "react-redux";
+import useUsers from "../hooks/useUsers";
+
+import { updateUser } from "../store/redux/reducer";
 
 import {
   getCurrentUser,
@@ -20,6 +25,18 @@ import "../css/Profile.css";
 function Profile() {
   const currentUser = getCurrentUser();
 
+  const dispatch = useDispatch();
+
+  const users = useSelector(
+    (state) => state.users,
+  );
+
+  console.log("USERS DARI REDUX:", users);
+
+  // GET USERS
+  useUsers();
+
+  // PROFILE STATE
   const [username, setUsername] = useState(
     currentUser?.username || "",
   );
@@ -32,29 +49,24 @@ function Profile() {
     currentUser?.password || "",
   );
 
-  // Film yang sedang dipilih
+  // SELECTED MOVIE
   const [selectedMovie, setSelectedMovie] =
     useState(null);
 
+  // UPDATE USER
   async function handleSave() {
-    console.log("DATA SEBELUM SAVE:", {
-      username,
-      email,
-      password,
-    });
-
     const result = await updateCurrentUser({
       username,
       email,
       password,
     });
 
-    console.log("HASIL SAVE:", result);
-
     if (!result.success) {
       alert(result.message);
       return;
     }
+
+    dispatch(updateUser(result.user));
 
     alert("Profil berhasil disimpan!");
   }
@@ -64,7 +76,6 @@ function Profile() {
       <Navbar />
 
       <div className="profile-container">
-
         <h1 className="profile-title">
           Profil Saya
         </h1>
@@ -106,37 +117,20 @@ function Profile() {
         />
 
         <div className="button-container">
+          <SaveButton onSave={handleSave} />
 
-          <SaveButton
-            onSave={handleSave}
-          />
-
-          <LogoutButton />
-
+          <DeleteAccountBtn />
         </div>
-
       </div>
 
-
-      {/* =========================
-          DAFTAR SAYA
-      ========================= */}
-
       <div className="daftar-movie-container">
-
         <CategorySection
           title="Daftar Saya"
           movies={currentUser?.myList || []}
           CardComponent={MovieCard}
           onMovieClick={setSelectedMovie}
         />
-
       </div>
-
-
-      {/* =========================
-          DETAIL MOVIE POPUP
-      ========================= */}
 
       {selectedMovie && (
         <DetailMovie
@@ -146,7 +140,6 @@ function Profile() {
           }
         />
       )}
-
 
       <Footer />
     </>
