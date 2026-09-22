@@ -18,7 +18,7 @@ const userSlice = createSlice({
 
     updateUser: (state, action) => {
       const index = state.findIndex(
-        (user) => user.id === action.payload.id,
+        (user) => user.id === action.payload.id
       );
 
       if (index !== -1) {
@@ -28,7 +28,7 @@ const userSlice = createSlice({
 
     deleteUser: (state, action) => {
       return state.filter(
-        (user) => user.id !== action.payload,
+        (user) => user.id !== action.payload
       );
     },
   },
